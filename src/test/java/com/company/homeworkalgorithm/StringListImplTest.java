@@ -1,7 +1,7 @@
 package com.company.homeworkalgorithm;
 
-import com.company.homeworkalgorithm.cervice.StringListService;
-import com.company.homeworkalgorithm.cervice.StringListServiceImpl;
+import com.company.homeworkalgorithm.service.StringList;
+import com.company.homeworkalgorithm.service.StringListImpl;
 import com.company.homeworkalgorithm.exeptions.ElementNotFoundException;
 import com.company.homeworkalgorithm.exeptions.NullRequestException;
 import com.company.homeworkalgorithm.exeptions.OutOfListSizeException;
@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StringListIServiceImplTest {
-    private StringListService list = new StringListServiceImpl();
+public class StringListImplTest {
+    private StringList list = new StringListImpl();
 
     @AfterEach
     public void afterEach() {
-        list = new StringListServiceImpl();
+        list = new StringListImpl();
     }
 
     //add(String item);
@@ -203,11 +203,11 @@ public class StringListIServiceImplTest {
         list.add("1");
         list.add("2");
         list.add("1");
-        StringListService expectedListService = new StringListServiceImpl();
-        expectedListService.add("1");
-        expectedListService.add("2");
-        expectedListService.add("1");
-        assertTrue(list.equals(expectedListService));
+        StringList expectedList = new StringListImpl();
+        expectedList.add("1");
+        expectedList.add("2");
+        expectedList.add("1");
+        assertTrue(list.equals(expectedList));
     }
 
     @Test
@@ -215,18 +215,18 @@ public class StringListIServiceImplTest {
         list.add("2");
         list.add("2");
         list.add("1");
-        StringListService expectedListService = new StringListServiceImpl();
-        expectedListService.add("1");
-        expectedListService.add("2");
-        expectedListService.add("1");
-        assertFalse(list.equals(expectedListService));
+        StringList expectedList = new StringListImpl();
+        expectedList.add("1");
+        expectedList.add("2");
+        expectedList.add("1");
+        assertFalse(list.equals(expectedList));
     }
 
     @Test
     void returnNullRequestExceptionEqualsTest3() {
         list.add("1");
         list.add("1");
-        StringListService expectedListService = null;
+        StringList expectedListService = null;
         assertThrows(NullRequestException.class,
                 () -> list.equals(expectedListService));
     }

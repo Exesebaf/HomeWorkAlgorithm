@@ -1,4 +1,4 @@
-package com.company.homeworkalgorithm.cervice;
+package com.company.homeworkalgorithm.service;
 
 
 import com.company.homeworkalgorithm.exeptions.ElementNotFoundException;
@@ -7,11 +7,11 @@ import com.company.homeworkalgorithm.exeptions.OutOfListSizeException;
 
 import java.util.Arrays;
 
-public class StringListServiceImpl implements StringListService {
+public class StringListImpl implements StringList {
     private String[] items;
     private int size;
 
-    public StringListServiceImpl() {
+    public StringListImpl() {
         this.items = new String[10];
     }
 
@@ -28,10 +28,6 @@ public class StringListServiceImpl implements StringListService {
         validateIndex(index);
         validateItem(item);
         validateSize();
-        if (index == size) {
-            items[size++] = item;
-            return item;
-        }
         System.arraycopy(items, index, items, index + 1, size - index);
         items[index] = item;
         size++;
@@ -100,7 +96,7 @@ public class StringListServiceImpl implements StringListService {
     }
 
     @Override
-    public boolean equals(StringListService otherList) {
+    public boolean equals(StringList otherList) {
         if ( otherList == null) {
             throw new NullRequestException();
         }
@@ -155,6 +151,8 @@ public class StringListServiceImpl implements StringListService {
     }
 
     private void validateSize() {
-        increaseArray();
+        if (size >= items.length)
+            increaseArray();
     }
 }
+
