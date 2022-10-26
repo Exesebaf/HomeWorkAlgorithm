@@ -19,7 +19,6 @@ public class StringListImplTest {
         list = new StringListImpl();
     }
 
-    //add(String item);
     @Test
     void returnCorrectValueAddTest1() {
         String expected = list.add("1");
@@ -40,7 +39,6 @@ public class StringListImplTest {
                 () -> list.add(null));
     }
 
-    //add(int index, String item);
     @Test
     void returnCorrectValueAddWithIndexTest1() {
         list.add("1");
@@ -61,14 +59,22 @@ public class StringListImplTest {
     }
 
     @Test
-    void returnOutOfListSizeExceptionAddWithIndexTest3() {
+    void returnCorrectValueAddWithIndexTest3() {
+        list.add("1");
+        list.add(1, "2");
+        String[] result = list.toArray();
+        String[] expectedResult = new String[]{"1", "2"};
+        assertArrayEquals(expectedResult, result);
+    }
+
+    @Test
+    void returnOutOfListSizeExceptionAddWithIndexTest4() {
         list.add("1");
         list.add("1");
         assertThrows(OutOfListSizeException.class,
                 () -> list.add(7, "2"));
     }
 
-    //set(int index, String item);
     @Test
     void returnCorrectValueSetTest1() {
         list.add("1");
@@ -88,7 +94,6 @@ public class StringListImplTest {
                 () -> list.set(7, "2"));
     }
 
-    //remove(String item);
     @Test
     void returnCorrectValueRemoveTest1() {
         list.add("1");
@@ -108,7 +113,6 @@ public class StringListImplTest {
                 () -> list.remove("2"));
     }
 
-    //remove(int index);
     @Test
     void returnCorrectValueRemoveWithIndexTest1() {
         list.add("1");
@@ -128,7 +132,30 @@ public class StringListImplTest {
                 () -> list.remove(7));
     }
 
-    //contains(String item);
+    @Test
+    void returnCorrectValueSortTest1() {
+        list.add("Dog");
+        list.add("Animal");
+        list.add("Cat");
+        list.add("Bird");
+        list.sort();
+        String[] result = list.toArray();
+        String[] expectedResult = new String[]{"Animal", "Bird", "Cat", "Dog"};
+        assertArrayEquals(expectedResult, result);
+    }
+
+    @Test
+    void returnCorrectValueSortTest2() {
+        list.add("5");
+        list.add("2");
+        list.add("3");
+        list.add("9");
+        list.sort();
+        String[] result = list.toArray();
+        String[] expectedResult = new String[]{"2", "3", "5", "9"};
+        assertArrayEquals(expectedResult, result);
+    }
+
     @Test
     void returnTrueContainsTest1() {
         list.add("1");
@@ -145,7 +172,6 @@ public class StringListImplTest {
         assertFalse(list.contains("5"));
     }
 
-    //indexOf(String item);
     @Test
     void returnCorrectIndexOfItemIndexOfTest1() {
         list.add("1");
@@ -163,7 +189,6 @@ public class StringListImplTest {
     }
 
 
-    //lastIndexOf(String item)
     @Test
     void returnCorrectIndexOfItemLastIndexOfTest1() {
         list.add("1");
@@ -180,7 +205,6 @@ public class StringListImplTest {
         assertEquals(list.lastIndexOf("3"), -1);
     }
 
-    //get(int index);
     @Test
     void returnCorrectValueGetTest1() {
         list.add("1");
@@ -197,7 +221,6 @@ public class StringListImplTest {
                 () -> list.get(7));
     }
 
-    //equals(StringList otherList);
     @Test
     void returnTrueIfStringListsAreEqualsEqualsTest1() {
         list.add("1");
@@ -223,16 +246,14 @@ public class StringListImplTest {
     }
 
     @Test
-    void returnNullRequestExceptionEqualsTest3() {
+    void eturnNullRequestExceptionEqualsTest3() {
         list.add("1");
         list.add("1");
-        StringList expectedListService = null;
+        StringList expectedList = null;
         assertThrows(NullRequestException.class,
-                () -> list.equals(expectedListService));
+                () -> list.equals(expectedList));
     }
 
-
-    //size();
     @Test
     void returnCorrectSizeTest1() {
         list.add("1");
@@ -244,7 +265,6 @@ public class StringListImplTest {
         assertEquals(list.size(), 2);
     }
 
-    //isEmpty();
     @Test
     void returnTrueIsEmptyTest1() {
         assertTrue(list.isEmpty());
@@ -256,7 +276,6 @@ public class StringListImplTest {
         assertFalse(list.isEmpty());
     }
 
-    //clear();
     @Test
     void removeAllItemsAndDecreaseSizeClearTest() {
         list.add("1");
@@ -269,7 +288,6 @@ public class StringListImplTest {
     }
 
 
-    //toArray();
     @Test
     void returnCorrectValueToArrayTest1() {
         String[] result = list.toArray();
@@ -285,10 +303,8 @@ public class StringListImplTest {
         assertArrayEquals(expectedResult, result);
     }
 
-    //increaseArray();
     @Test
-    //при добавлении элементов, большего кол-ва чем длина массива в конструкторе,
-    // должен присваивать новый массив с большей длиной и корректно переносить элементы в новый массив.
+
     void correctlyTransferElementValuesToTheNewArrayWhenTheStorageIsIncremented() {
         for (int i = 0; i < 11; i++) {
             String expected = list.add("1");

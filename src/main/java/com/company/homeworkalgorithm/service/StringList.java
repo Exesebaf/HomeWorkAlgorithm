@@ -1,6 +1,7 @@
 package com.company.homeworkalgorithm.service;
 
 public interface StringList {
+
     // Добавление элемента.
     // Вернуть добавленный элемент
     // в качестве результата выполнения.
@@ -35,6 +36,9 @@ public interface StringList {
     // или исключение, если подобный
     // элемент отсутствует в списке.
     String remove(int index);
+
+    //Сортировка массива
+    String[] sort();
 
     // Проверка на существование элемента.
     // Вернуть true/false;
